@@ -1,0 +1,144 @@
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurant Recommendation</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #ff6a00, #ee0979);
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Main container */
+.container {
+    width: 85%;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Form styling */
+form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+select, button {
+    padding: 12px;
+    margin: 10px;
+    width: 260px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+button {
+    background: #00f2fe;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+/* Cards */
+.card {
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 15px;
+    width: 80%;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #ee0979;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.4);
+    margin-top: 30px;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+🍽 Restaurant Recommendation System
+</div>
+
+<div class="container">
+
+<form method="POST">
+<select name="restaurant" required>
+<option value="">Select Restaurant</option>
+{% for r in restaurants %}
+<option value="{{r}}">{{r}}</option>
+{% endfor %}
+</select>
+<br>
+<button type="submit">Get Recommendations</button>
+</form>
+
+{% if selected %}
+
+<h2 style="text-align:center;">🌟 Selected Restaurant</h2>
+
+<div class="card">
+<h3>{{selected['name']}}</h3>
+<p><b>📍 Location:</b> {{selected['location']}}</p>
+<p><b>🍴 Cuisine:</b> {{selected['cuisine']}}</p>
+<p><b>🍕 Food Item:</b> {{selected['food_item']}}</p>
+<p><b>⭐ Rating:</b> {{selected['rating']}}</p>
+<p><b>💰 Budget:</b> ₹{{selected['budget']}}</p>
+</div>
+
+<h2 style="text-align:center;">🔥 Recommended Restaurants</h2>
+
+{% for rec in recommendations %}
+<div class="card">
+<h3>{{rec['name']}}</h3>
+<p><b>📍 Location:</b> {{rec['location']}}</p>
+<p><b>🍴 Cuisine:</b> {{rec['cuisine']}}</p>
+<p><b>🍕 Food Item:</b> {{rec['food_item']}}</p>
+<p><b>⭐ Rating:</b> {{rec['rating']}}</p>
+<p><b>💰 Budget:</b> ₹{{rec['budget']}}</p>
+</div>
+{% endfor %}
+
+{% endif %}
+
+</div>
+
+<div class="footer">
+© 2026 Restaurant Recommendation System | Designed with ❤️
+</div>
+
+</body>
+</html>
+"""
